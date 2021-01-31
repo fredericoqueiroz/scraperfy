@@ -11,7 +11,7 @@ setuptools.setup(
     description="A Financial Data Web Scraper",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/fredericoqueiroz/selenium-web-scraper",
+    url="https://github.com/fredericoqueiroz/scraperfy",
     packages=setuptools.find_packages(),
     license="MIT",
     classifiers=[
