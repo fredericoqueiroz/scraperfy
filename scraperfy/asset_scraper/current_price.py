@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -19,14 +20,27 @@ class CurrentPrice:
         self._scrape_asset_data()
 
     def _navigate(self):
-        self.driver.implicitly_wait(30)
+        #self.driver.implicitly_wait(20)
         self.driver.get(self.url)
 
     def _search_asset(self):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(
+            EC.element_to_be_clickable((By.ID, self.search_button_id)),
+            message=f'Failed to fetch asset {self.asset}'
+        )
         self.driver.find_element_by_id(self.search_input_id).send_keys(self.asset)
         self.driver.find_element_by_id(self.search_button_id).click()
 
     def _scrape_asset_data(self):
+        wait = WebDriverWait(self.driver, 5)
+        wait.until_not(
+            EC.text_to_be_present_in_element(
+                (By.ID, 'ativo'), 
+                '______',
+            ),
+            message=f'Failed to fetch asset {self.asset}'
+        )
         self.search_date = self.driver.find_element_by_id('dataConsulta').text
         self.search_time = self.driver.find_element_by_id('horaConsulta').text
         self.asset_symbol = self.driver.find_element_by_id('ativo').text
