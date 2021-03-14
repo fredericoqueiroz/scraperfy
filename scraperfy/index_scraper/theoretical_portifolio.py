@@ -19,8 +19,8 @@ class TheoreticalDailyPortifolio:
         self._format_portifolio_date()
 
     def _navigate(self):
+        self.driver.implicitly_wait(10)
         self.driver.get(self.url)
-        self.driver.implicitly_wait(5)
 
     def _scrape_table_data(self):
         self.table = pd.read_html(self.url, decimal=',', thousands='.')[0][:-1]

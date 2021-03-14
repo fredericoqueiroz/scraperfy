@@ -1,6 +1,9 @@
+import datetime
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 class CurrentPrice:
     def __init__(self, driver, asset):
@@ -47,10 +50,24 @@ class CurrentPrice:
         self.asset_price = self.driver.find_element_by_id('cotacaoAtivo').text
         self.asset_oscilation = self.driver.find_element_by_id('oscilacaoAtivo').text
 
+    def get_asset_symbol(self):
+        return self.asset_symbol
+    
+    def get_asset_price(self):
+        return self.asset_price
+    
+    def get_asset_oscilation(self):
+        return self.asset_oscilation
+    
     def get_search_date(self):
-        return self.search_date
+        d, m, y = self.search_date.split('/')
+        search_date = datetime.date(int(y), int(m), int(d))
+        return search_date
 
-    #debug
+    def get_search_time(self):
+        return self.search_time
+
+    '''Debug'''
     def print_asset_data(self):
         print(f'Data da Consulta: {self.search_date}')
         print(f'Hora da Consulta: {self.search_time}')

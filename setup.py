@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="scraperfy",
-    version="0.0.1",
+    version="0.2.0",
     author="Frederico Queiroz",
     author_email="rqfrederico@gmail.com",
     description="A Financial Data Web Scraper",
