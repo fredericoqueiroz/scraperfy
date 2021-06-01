@@ -1,4 +1,5 @@
 import datetime
+import json
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -23,7 +24,6 @@ class CurrentPrice:
         self._scrape_asset_data()
 
     def _navigate(self):
-        #self.driver.implicitly_wait(20)
         self.driver.get(self.url)
 
     def _search_asset(self):
@@ -66,6 +66,16 @@ class CurrentPrice:
 
     def get_search_time(self):
         return self.search_time
+    
+    def get_json(self):
+        dict = {
+            'ativo': self.asset_symbol,
+            'cotacaoAtivo': self.asset_price,
+            'oscilacaoAtivo': self.asset_oscilation,
+            'dataConsulta': self.search_date,
+            'horaConsulta': self.search_time
+        }
+        return json.dumps(dict, sort_keys=False, indent=3)
 
     '''Debug'''
     def print_asset_data(self):
