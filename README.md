@@ -132,7 +132,7 @@ Result:
 }
 ```
 
-[Index Theoretical Daily Portifolio](https://github.com/fredericoqueiroz/scraperfy/blob/main/scraperfy/index_scraper/theoretical_portifolio.py)
+### [Index Theoretical Daily Portifolio](https://github.com/fredericoqueiroz/scraperfy/blob/main/scraperfy/index_scraper/theoretical_portifolio.py)
 
 ```python
 import json
