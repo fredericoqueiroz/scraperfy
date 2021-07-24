@@ -176,6 +176,9 @@ class CompanyIndicators:
         cagr_profit = group_element.find_element_by_xpath('.//div[2]')
         self.growth_indicators['CagrLucros'] = self._scrape_single_indicator(cagr_profit)
 
+    def get_asset(self):
+        return self.asset
+
     def get_valuation_indicators(self):
 
         return json.dumps(self.valuation_indicators, indent=4, ensure_ascii=False)
