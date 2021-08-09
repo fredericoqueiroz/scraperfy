@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 class CompanyIndicators:
 
@@ -7,6 +8,7 @@ class CompanyIndicators:
         self.driver = driver
         self.asset = asset.upper()
         self.url = f'https://statusinvest.com.br/acoes/eua/{self.asset}' if american else f'https://statusinvest.com.br/acoes/{self.asset}'
+        self.search_date = datetime.now()
         self.valuation_indicators = {}
         self.debt_indicators = {}
         self.efficiency_indicators = {}
@@ -43,6 +45,7 @@ class CompanyIndicators:
         # Dividend Yield
         dividend_yield = group_element.find_element_by_xpath('.//div[1]')
         self.valuation_indicators['DividendYield'] = self._scrape_single_indicator(dividend_yield)
+        self.valuation_indicators['DividendYield']['valor'] = self.valuation_indicators['DividendYield']['valor'].replace('%', '')
 
         # Preco/Lucro
         price_earnings = group_element.find_element_by_xpath('.//div[2]')
@@ -178,6 +181,9 @@ class CompanyIndicators:
 
     def get_asset(self):
         return self.asset
+    
+    def get_search_date(self):
+        return self.search_date.isoformat()
 
     def get_valuation_indicators(self):
 
