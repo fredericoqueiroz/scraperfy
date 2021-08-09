@@ -33,7 +33,7 @@ class CompanyIndicators:
 
         data = {}
         data['simbolo'] = base.find_element_by_xpath('.//h3').text
-        data['valor'] = base.find_element_by_xpath('.//div/strong').text
+        data['valor'] = base.find_element_by_xpath('.//div/strong').text.replace(',', '.')
         data['descricao'] = base.get_attribute('title')
 
         return data
