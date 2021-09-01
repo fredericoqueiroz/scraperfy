@@ -36,6 +36,9 @@ class CompanyIndicators:
         data['valor'] = base.find_element_by_xpath('.//div/strong').text.replace(',', '.')
         data['descricao'] = base.get_attribute('title')
 
+        if data['valor'] == "-":
+            data['valor'] = None
+
         return data
 
     def _scrape_valuation_indicators(self):
@@ -134,18 +137,22 @@ class CompanyIndicators:
         # Margem Bruta
         gross_margin = group_element.find_element_by_xpath('.//div[1]')
         self.efficiency_indicators['MargemBruta'] = self._scrape_single_indicator(gross_margin)
+        self.efficiency_indicators['MargemBruta']['valor'] = self.efficiency_indicators['MargemBruta']['valor'].replace('%', '')
 
         # Margem EBITDA
         ebitda_margin = group_element.find_element_by_xpath('.//div[2]')
         self.efficiency_indicators['MargemEbitda'] = self._scrape_single_indicator(ebitda_margin)
+        self.efficiency_indicators['MargemEbitda']['valor'] = self.efficiency_indicators['MargemEbitda']['valor'].replace('%', '')
 
         # Margem EBIT
         ebit_margin = group_element.find_element_by_xpath('.//div[3]')
         self.efficiency_indicators['MargemEbit'] = self._scrape_single_indicator(ebit_margin)
+        self.efficiency_indicators['MargemEbit']['valor'] = self.efficiency_indicators['MargemEbit']['valor'].replace('%', '')
 
         # Margem Liquida
         net_margin = group_element.find_element_by_xpath('.//div[4]')
         self.efficiency_indicators['MargemLiquida'] = self._scrape_single_indicator(net_margin)
+        self.efficiency_indicators['MargemLiquida']['valor'] = self.efficiency_indicators['MargemLiquida']['valor'].replace('%', '')
 
     def _scrape_profitability_indicators(self):
 
