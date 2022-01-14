@@ -161,14 +161,17 @@ class CompanyIndicators:
         # Retorno sobre Patrimonio Liquido (ROE)
         return_on_requity = group_element.find_element_by_xpath('.//div[1]')
         self.profitability_indicators['RetornoPatrimonioLiquido'] = self._scrape_single_indicator(return_on_requity)
+        self.profitability_indicators['RetornoPatrimonioLiquido']['valor'] = self.profitability_indicators['RetornoPatrimonioLiquido']['valor'].replace('%', '')
 
         # Retorno sobre Ativo (ROA)
         return_on_assets = group_element.find_element_by_xpath('.//div[2]')
         self.profitability_indicators['RetornoAtivo'] = self._scrape_single_indicator(return_on_assets)
+        self.profitability_indicators['RetornoAtivo']['valor'] = self.profitability_indicators['RetornoAtivo']['valor'].replace('%', '')
 
         # Retorno sobre Capital Investido (ROIC)
         return_on_invested_capital = group_element.find_element_by_xpath('.//div[3]')
         self.profitability_indicators['RetornoCapitalInvestido'] = self._scrape_single_indicator(return_on_invested_capital)
+        self.profitability_indicators['RetornoCapitalInvestido']['valor'] = self.profitability_indicators['RetornoCapitalInvestido']['valor'].replace('%', '')
 
         # Giro Ativos
         asset_turnover_ratio = group_element.find_element_by_xpath('.//div[4]')
